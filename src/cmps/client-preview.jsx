@@ -1,6 +1,6 @@
 import { FaTrash } from "react-icons/fa";
 import { useMutation } from "@apollo/client";
-import { DELETE_CLIENT, GET_CLIENTS } from "../services/query.service";
+import { DELETE_CLIENT, GET_CLIENTS } from "../services/graphql.service";
 
 export default function ClientPreview({ client }) {
   const [deleteClient] = useMutation(DELETE_CLIENT, {

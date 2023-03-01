@@ -33,4 +33,14 @@ const ADD_CLIENT = gql`
   }
 `;
 
-export { GET_CLIENTS, DELETE_CLIENT, ADD_CLIENT };
+const GET_PROJECTS = gql`
+  query getProjects {
+    projects {
+      id
+      name
+      status
+    }
+  }
+`;
+
+export { GET_CLIENTS, DELETE_CLIENT, ADD_CLIENT, GET_PROJECTS };

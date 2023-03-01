@@ -1,8 +1,9 @@
 import Header from "./cmps/header";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import Clients from "./cmps/clients";
-import  ClientAdd  from "./cmps/client-add";
-import  Projects  from "./cmps/projects";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/home-page";
+import NotFound from "./pages/not-found";
+import ProjectDetails from './pages/project-details'
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -32,12 +33,17 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <Header />
-        <div className="container">
-          <ClientAdd/>
-          <Projects/>
-          <Clients />
-        </div>
+        <Router>
+          <Header />
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<HomePage/>}/>
+              <Route path="*" element={<NotFound/>}/>
+              <Route path="/project/:id" element={<ProjectDetails/>}/>
+              
+            </Routes>
+          </div>
+        </Router>
       </ApolloProvider>
     </>
   );

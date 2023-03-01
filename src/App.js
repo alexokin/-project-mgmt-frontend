@@ -1,10 +1,29 @@
 import Header from "./cmps/header";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Clients from "./cmps/clients";
+import  ClientAdd  from "./cmps/client-add";
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        clients: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+        projects: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
+  },
+});
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
-  cache: new InMemoryCache(),
+  uri: "http://localhost:5000/graphql",
+  cache,
 });
 
 function App() {
@@ -13,6 +32,7 @@ function App() {
       <ApolloProvider client={client}>
         <Header />
         <div className="container">
+          <ClientAdd/>
           <Clients />
         </div>
       </ApolloProvider>

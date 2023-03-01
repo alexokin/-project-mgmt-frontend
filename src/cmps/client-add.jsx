@@ -25,9 +25,9 @@ export default function ClientAdd() {
       return alert("Please fill in all fields");
     }
     addClient(name, email, phone);
-    setName('')
-    setEmail('')
-    setPhone('')
+    setName("");
+    setEmail("");
+    setPhone("");
   }
 
   return (
@@ -68,6 +68,7 @@ export default function ClientAdd() {
                 <div className="mb-3">
                   <label className="form-label">Name </label>
                   <input
+                    className="form-control"
                     type="text"
                     value={name}
                     onChange={(ev) => {
@@ -79,6 +80,7 @@ export default function ClientAdd() {
                 <div className="mb-3">
                   <label className="form-label">Email </label>
                   <input
+                    className="form-control"
                     type="email"
                     value={email}
                     onChange={(ev) => {
@@ -90,6 +92,7 @@ export default function ClientAdd() {
                 <div className="mb-3">
                   <label className="form-label">Phone</label>
                   <input
+                    className="form-control"
                     type="text"
                     value={phone}
                     onChange={(ev) => {

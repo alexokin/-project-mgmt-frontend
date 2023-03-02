@@ -1,14 +1,29 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { FaList } from "react-icons/fa";
-import { GET_CLIENTS, GET_PROJECTS } from "../services/graphql.service";
-import Spinner from "./spinner";
+import {
+  GET_CLIENTS,
+  GET_PROJECTS,
+  ADD_PROJECT,
+} from "../../services/graphql.service";
+import Spinner from "../spinner";
 
 export default function ProjectAdd() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [clientId, setClientId] = useState("");
   const [status, setStatus] = useState("new");
+
+  const [addProject] = useMutation(ADD_PROJECT, {
+    variables: { name, description, clientId, status },
+    update(cache, { data: { addProject } }) {
+      const { projects } = cache.readQuery({ query: GET_PROJECTS });
+      cache.writeQuery({
+        query: GET_PROJECTS,
+        data: { projects: [...projects, addProject] },
+      });
+    },
+  });
 
   // Get clients for select
   const { loading, error, data } = useQuery(GET_CLIENTS);
@@ -18,6 +33,7 @@ export default function ProjectAdd() {
     if (name === "" || description === "" || status === "") {
       return alert("Please fill in all fields");
     }
+    addProject(name, description, clientId, status);
 
     setName("");
     setDescription("");
@@ -110,13 +126,11 @@ export default function ProjectAdd() {
                         id="clientId"
                       >
                         <option value="">Select Client</option>
-                        {
-                            data.clients.map((client) => (
-                                <option value={client.id} key={clientId.id}>
-                                    {client.name}
-                                </option>
-                            ))
-                        }
+                        {data.clients.map((client, idx) => (
+                          <option value={client.id} key={idx}>
+                            {client.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <button

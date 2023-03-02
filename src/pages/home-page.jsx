@@ -1,7 +1,7 @@
-import ClientAdd from "../cmps/client-add";
-import Clients from "../cmps/clients";
-import ProjectAdd from "../cmps/project-add";
-import Projects from "../cmps/projects";
+import ClientAdd from "../cmps/client/client-add";
+import Clients from "../cmps/client/clients";
+import ProjectAdd from "../cmps/project/project-add";
+import Projects from "../cmps/project/projects";
 
 export default function HomePage() {
   return (

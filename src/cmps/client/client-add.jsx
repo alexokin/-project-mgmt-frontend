@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { FaUser } from "react-icons/fa";
-import { ADD_CLIENT, GET_CLIENTS } from "../services/graphql.service";
+import { ADD_CLIENT, GET_CLIENTS } from "../../services/graphql.service";
 
 export default function ClientAdd() {
   const [name, setName] = useState("");

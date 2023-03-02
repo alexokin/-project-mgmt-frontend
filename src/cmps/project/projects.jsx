@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
-import { GET_PROJECTS } from "../services/graphql.service";
+import { GET_PROJECTS } from "../../services/graphql.service";
 import ProjectPreview from "./project-preview";
-import Spinner from "./spinner";
+import Spinner from "../spinner";
 
 export default function Projects() {
   const { loading, error, data } = useQuery(GET_PROJECTS);

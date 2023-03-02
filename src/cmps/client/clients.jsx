@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import ClientPreview from "./client-preview";
-import  Spinner  from "./spinner";
-import { GET_CLIENTS } from "../services/graphql.service";
+import  Spinner  from "../spinner";
+import { GET_CLIENTS } from "../../services/graphql.service";
 
 
 export default function Clients() {

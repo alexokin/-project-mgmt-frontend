@@ -1,21 +1,17 @@
 import { FaTrash } from "react-icons/fa";
 import { useMutation } from "@apollo/client";
-import { DELETE_CLIENT, GET_CLIENTS } from "../services/graphql.service";
+import {
+  DELETE_CLIENT,
+  GET_CLIENTS,
+  GET_PROJECTS,
+} from "../../services/graphql.service";
 
 export default function ClientPreview({ client }) {
   const [deleteClient] = useMutation(DELETE_CLIENT, {
     variables: { id: client.id },
-    update(cache, { data: { deleteClient } }) {
-      const { clients } = cache.readQuery({ query: GET_CLIENTS });
-      cache.writeQuery({
-        query: GET_CLIENTS,
-        data: {
-          clients: clients.filter((client) => client.id !== deleteClient.id),
-        },
-      });
-    },
+    refetchQueries: [{ query: GET_CLIENTS }, { query: GET_PROJECTS }],
   });
-  
+
   return (
     <tr>
       <td>{client.name}</td>

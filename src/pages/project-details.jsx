@@ -1,6 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { Link, useParams } from "react-router-dom";
-import ClientInfo from "../cmps/client-info";
+import ClientInfo from "../cmps/client/client-info";
+import DeleteProjectButton from "../cmps/project/delete-project-button";
+import EditProjectForm from "../cmps/project/edit-project-form";
 import Spinner from "../cmps/spinner";
 import { GET_PROJECT } from "../services/graphql.service";
 
@@ -24,7 +26,9 @@ export default function ProjectDetails() {
           <p>{data.project.description}</p>
           <h5 className="mt-3">Project Status</h5>
           <p className="lead">{data.project.status}</p>
-          <ClientInfo client={data.project.client}/>
+          <ClientInfo client={data.project.client} />
+          <EditProjectForm project={data.project}/>
+          <DeleteProjectButton projectId={data.project.id} />
         </div>
       )}
     </>
